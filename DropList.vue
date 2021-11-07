@@ -1,12 +1,12 @@
 <template>
     <div class="droplist">
         <div class="droper">
-            <p class="list" @click="use">{{name}}</p>
+            <p class="list" @click="use">{{nameP}}</p>
             <div v-for="item in list" v-bind:key="item">
                 <p class="list" v-if="open" @click="change(item)">{{item}}</p>
             </div>
         </div>
-        <p class="clear" @click="clear">default</p>
+        <p class="clear" @click="clear">-</p>
     </div>
 </template>
 <script>
@@ -15,7 +15,8 @@
         data() {
             return {
                 open: false,
-                mind: [this.name, this.list]
+                mind: [this.name, this.list],
+                nameP: this.name
             }
         },
         methods: {
@@ -23,14 +24,13 @@
                 this.open = !this.open
             },
             change(value) {
-                this.name = value
-                this.$emit('value', this.name)
+                this.nameP = value
+                this.$emit('value', this.nameP)
                 this.use()
             },
             clear() {
-                this.name = this.mind[0]
-                this.list = this.mind[1]
-                this.use()
+                this.nameP = this.mind[0]
+                this.open = false
             }
         }
     }
